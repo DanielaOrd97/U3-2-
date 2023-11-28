@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BurgerU3", "BurgerU3.csproj", "{108D9AA2-181E-45A7-BCB6-45C4762551C7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{108D9AA2-181E-45A7-BCB6-45C4762551C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{108D9AA2-181E-45A7-BCB6-45C4762551C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{108D9AA2-181E-45A7-BCB6-45C4762551C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{108D9AA2-181E-45A7-BCB6-45C4762551C7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D1BA0B00-30DA-45D7-834E-587A0E4E25BA}
+	EndGlobalSection
+EndGlobal
