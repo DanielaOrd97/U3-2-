@@ -39,5 +39,16 @@ namespace BurgerU3.Areas.Admin.Controllers
 
             return View(vm);
         }
+
+        public IActionResult Agregar()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //public IActionResult Agregar()
+        //{
+        //    return View();
+        //}
     }
 }
