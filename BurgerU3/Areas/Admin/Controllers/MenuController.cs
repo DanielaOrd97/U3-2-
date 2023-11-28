@@ -73,9 +73,10 @@ namespace BurgerU3.Areas.Admin.Controllers
 
             if (vm.Archivo != null)
             {
-                if (vm.Archivo.ContentType != "image/jepg")
+                //if (vm.Archivo.ContentType != "image/jepg")
+                if (vm.Archivo.ContentType != "image/png")
                 {
-                    ModelState.AddModelError("", "solo se permiten imagenes jpg.");
+                    ModelState.AddModelError("", "solo se permiten imagenes png.");
                 }
 
                 if (vm.Archivo.Length > 500 * 1024)//500kb
@@ -91,15 +92,15 @@ namespace BurgerU3.Areas.Admin.Controllers
 
                 if(vm.Archivo == null)
                 {
-                    System.IO.File.Copy("wwwroot/images/burger.png", $"wwwroot/images/{vm.menu.Id}.jpg");
+                    System.IO.File.Copy("wwwroot/images/burger.png", $"wwwroot/hamburguesas/{vm.menu.Id}.png");
                 }
                 else
                 {
-                    System.IO.FileStream fs = System.IO.File.Create($"wwwroot/images/{vm.menu.Id}.jpg");
+                    System.IO.FileStream fs = System.IO.File.Create($"wwwroot/hamburguesas/{vm.menu.Id}.png");
                     vm.Archivo.CopyTo(fs);
                     fs.Close();
                 }
-                //return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
 
             vm.ListaClasificaciones = RepositorioClasif.GetAll().OrderBy(x => x.Nombre).Select(x => new ClasificacionModel
@@ -137,7 +138,7 @@ namespace BurgerU3.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Editar(AgregarElementoAdminViewModel vm)
         {
-
+            ModelState.Clear();
             if (vm.Archivo != null)
             {
                 if (vm.Archivo.ContentType != "image/jepg")

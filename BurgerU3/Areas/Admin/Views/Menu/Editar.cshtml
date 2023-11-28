@@ -38,7 +38,7 @@
         <input type="file" id="imagen" accept="image/png" onchange="previewImagen()" asp-for="Archivo">
         <img id="imagen-preview" src="~/images/burger.png">
     </span>
-
+    @Html.ValidationSummary(true)
     <div class="botones">
         <input type="submit" value="Guardar" />
         <a href="~/Admin/Menu">
