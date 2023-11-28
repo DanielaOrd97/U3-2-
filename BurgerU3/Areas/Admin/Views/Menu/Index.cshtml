@@ -1,0 +1,60 @@
+﻿@model BurgerU3.Areas.Admin.Models.ViewModels.MenuAdminViewModel;
+@{
+    Layout = "AdminLayout";
+}
+
+<section class="menu2">
+
+    @foreach (var item in Model.ListaClasificaciones)
+    {
+        <h1>@item.Nombre</h1>
+
+
+        @foreach (var i in Model.ListaH)
+        {
+            if(i.Clasificacion == item.Nombre)
+            {
+                <div>
+                    <img src="~/hamburguesas/@(i.Id).png" />
+                    <h1>@i.Nombre</h1>
+                    <h2><del>$110.99</del><br />@i.Precio</h2>
+                    <p>
+                        @i.Descripcion
+                    </p>
+
+                    <span class="acciones">
+                        <a href="editar.html">Editar</a>
+                        <a href="eliminar.html">Eliminar</a>
+                        <a href="quitarpromocion.html">Quitar promoción</a>
+
+                    </span>
+                </div>
+            }
+          
+    }
+
+        @*@foreach (var i in Model.ListaH)
+        {
+            <div>
+                <img src="~/hamburguesas/@(i.Id).png" />
+                <h1>@i.Nombre</h1>
+                <h2><del>$110.99</del><br />@i.Precio</h2>
+                <p>
+                    @i.Descripcion
+                </p>
+
+                <span class="acciones">
+                    <a href="editar.html">Editar</a>
+                    <a href="eliminar.html">Eliminar</a>
+                    <a href="quitarpromocion.html">Quitar promoción</a>
+
+                </span>
+            </div>
+        }*@
+       
+    }
+    
+    
+
+    <a class="fab" href="agregar.html">+</a>
+</section>
