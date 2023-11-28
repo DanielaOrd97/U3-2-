@@ -10,6 +10,7 @@ namespace BurgerU3.Areas.Admin.Models.ViewModels
 
     public class ClasificacionModel
     {
+        public int Id { get; set; }
         public string Nombre { get; set; } = null!;
     }
 
