@@ -121,11 +121,26 @@ namespace BurgerU3.Areas.Admin.Controllers
             return View(elemento);
         }
 
-        //[HttpPost]
-        //public IActionResult Eliminar(Menu m)
-        //{
-        //    var elemento = RepositorioM.Get(id);
-        //}
+        [HttpPost]
+        public IActionResult Eliminar(Menu m)
+        {
+            var elemento = RepositorioM.Get(m.Id);
+            if(elemento == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            RepositorioM.Delete(elemento);
+
+            var ruta = $"wwwroot/hamburguesas/{m.Id}.jpg";
+
+            if (System.IO.File.Exists(ruta))
+            {
+                System.IO.File.Delete(ruta);
+            }
+
+            return RedirectToAction("Index");
+        }
 
     }
 }
