@@ -57,36 +57,36 @@ namespace BurgerU3.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Agregar(AgregarElementoAdminViewModel vm)
         {
+            ModelState.Clear();
+            if (string.IsNullOrWhiteSpace(vm.menu.Nombre))
+            {
+                ModelState.AddModelError("", "escriba el nombre correspondiente.");
+            }
+            if (vm.menu.Precio == null || vm.menu.Precio <= 0)
+            {
+                ModelState.AddModelError("", "introduzca el precio correctamente.");
+            }
+            if (string.IsNullOrWhiteSpace(vm.menu.Descripción))
+            {
+                ModelState.AddModelError("", "ingrese la descripcion.");
+            }
 
-            //if (string.IsNullOrWhiteSpace(vm.menu.Nombre))
-            //{
-            //    ModelState.AddModelError("","Escriba el nombre correspondiente.");
-            //}
-            //if (vm.menu.Precio == null || vm.menu.Precio <= 0)
-            //{
-            //    ModelState.AddModelError("", "Introduzca el precio correctamente.");
-            //}
-            //if (string.IsNullOrWhiteSpace(vm.menu.Descripción))
-            //{
-            //    ModelState.AddModelError("","Ingrese la descripcion.");
-            //}
-            
-            //if(vm.Archivo != null)
-            //{
-            //    if(vm.Archivo.ContentType != "image/jepg")
-            //    {
-            //        ModelState.AddModelError("", "Solo se permiten imagenes JPG.");
-            //    }
+            if (vm.Archivo != null)
+            {
+                if (vm.Archivo.ContentType != "image/jepg")
+                {
+                    ModelState.AddModelError("", "solo se permiten imagenes jpg.");
+                }
 
-            //    if (vm.Archivo.Length > 500 * 1024)//500kb
-            //    {
-            //        ModelState.AddModelError("", "Solo se permiten archivos no mayores a 500Kb");
+                if (vm.Archivo.Length > 500 * 1024)//500kb
+                {
+                    ModelState.AddModelError("", "solo se permiten archivos no mayores a 500kb");
 
-            //    }
-            //}
+                }
+            }
 
-            //if (ModelState.IsValid)
-            //{
+            if (ModelState.IsValid)
+            {
                 RepositorioM.Insert(vm.menu);
 
                 if(vm.Archivo == null)
@@ -99,12 +99,91 @@ namespace BurgerU3.Areas.Admin.Controllers
                     vm.Archivo.CopyTo(fs);
                     fs.Close();
                 }
-            //return RedirectToAction("Index");
-            //}
+                //return RedirectToAction("Index");
+            }
 
             vm.ListaClasificaciones = RepositorioClasif.GetAll().OrderBy(x => x.Nombre).Select(x => new ClasificacionModel
             {
                 Nombre = x.Nombre,
+            }).ToList();
+
+            return View(vm);
+        }
+
+
+        public IActionResult Editar(int id)
+        {
+            var elemento = RepositorioM.Get(id);
+
+            if(elemento == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                AgregarElementoAdminViewModel vm = new();
+                vm.menu = elemento;
+                vm.ListaClasificaciones = RepositorioClasif.GetAll().OrderBy(x => x.Nombre).Select(x => new ClasificacionModel
+                {
+                    Id = x.Id,
+                    Nombre = x.Nombre
+                }).ToList();
+
+                return View(vm);
+            }
+            
+        }
+
+        [HttpPost]
+        public IActionResult Editar(AgregarElementoAdminViewModel vm)
+        {
+
+            if (vm.Archivo != null)
+            {
+                if (vm.Archivo.ContentType != "image/jepg")
+                {
+                    ModelState.AddModelError("", "Solo se permiten imagenes JPG.");
+                }
+
+                if (vm.Archivo.Length > 500 * 1024)//500kb
+                {
+                    ModelState.AddModelError("", "Solo se permiten archivos no mayores a 500Kb");
+
+                }
+            }
+
+            if (ModelState.IsValid)
+            {
+                var elemento = RepositorioM.Get(vm.menu.Id);
+
+                if(elemento == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                elemento.Nombre = vm.menu.Nombre;
+                elemento.Precio = vm.menu.Precio;
+                elemento.Descripción = vm.menu.Descripción;
+                elemento.IdClasificacion = vm.menu.IdClasificacion;
+
+
+                RepositorioM.Update(elemento);
+
+                
+                //Copia la nueva ruta.
+                if(vm.Archivo != null)
+                {
+                    System.IO.FileStream fs = System.IO.File.Create($"wwwroot/images/{vm.menu.Id}.jpg");
+                    vm.Archivo.CopyTo(fs);
+                    fs.Close();
+                }
+                return RedirectToAction("Index");
+            }
+
+            vm.ListaClasificaciones = RepositorioClasif.GetAll().OrderBy(x => x.Nombre).Select(x => new ClasificacionModel
+            {
+                Id = x.Id,
+                Nombre = x.Nombre
             }).ToList();
 
             return View(vm);

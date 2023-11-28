@@ -5,8 +5,12 @@
 }
 
 
-<form action="~/Admin/Menu/Agregar" method="post" enctype="multipart/form-data">
-    <h1>Agregar hamburguesa al menú</h1>
+
+<form action="~/Admin/Menu/Editar" method="post" enctype="multipart/form-data">
+    <h1>Editar hamburguesa del menú</h1>
+
+    <input type="hidden" asp-for="menu.Id"/>
+
     <span>
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" required asp-for="menu.Nombre">
@@ -34,9 +38,9 @@
         <input type="file" id="imagen" accept="image/png" onchange="previewImagen()" asp-for="Archivo">
         <img id="imagen-preview" src="~/images/burger.png">
     </span>
-    @Html.ValidationSummary(true)
+
     <div class="botones">
-        <input type="submit" value="Agregar" />
+        <input type="submit" value="Guardar" />
         <a href="~/Admin/Menu">
             <input type="button" value="Cancelar" />
         </a>
@@ -66,5 +70,4 @@
         }
     }
 </script>
-
 
