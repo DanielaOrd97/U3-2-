@@ -174,7 +174,7 @@ namespace BurgerU3.Areas.Admin.Controllers
                 //Copia la nueva ruta.
                 if(vm.Archivo != null)
                 {
-                    System.IO.FileStream fs = System.IO.File.Create($"wwwroot/images/{vm.menu.Id}.jpg");
+                    System.IO.FileStream fs = System.IO.File.Create($"wwwroot/hamburguesas/{vm.menu.Id}.png");
                     vm.Archivo.CopyTo(fs);
                     fs.Close();
                 }

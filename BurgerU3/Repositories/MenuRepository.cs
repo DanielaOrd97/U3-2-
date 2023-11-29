@@ -16,7 +16,18 @@ namespace BurgerU3.Repositories
                 .OrderBy(x => x.Nombre);
         }
 
+    }
 
+    public class ClasifRepository : Repository<Clasificacion>
+    {
+        public ClasifRepository(NeatContext context) : base(context)
+        {
+        }
 
+        public override IEnumerable<Clasificacion> GetAll()
+        {
+            return Context.Clasificacion
+                .Include(x => x.Menu);
+        }
     }
 }

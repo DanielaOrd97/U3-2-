@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewData["Title"] = "Layout";
+}
+
+<html>
+<head>
+    <link href="~/estilos.css" rel="stylesheet" />
+    <title>Neat Burguer</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="~/">Principal</a>
+            <a href="promociones.html">Promociones</a>
+            <a href="~/Home/VerMenu">Menú</a>
+        </nav>
+    </header>
+    <main>
+
+        @RenderBody()
+    </main>
+</body>
+</html>
+
