@@ -5,14 +5,14 @@
 
 <section class="menu2">
 
-    @foreach (var item in Model.ListaClasificaciones)
+   @* @foreach (var item in Model.ListaClasificaciones)
     {
         <h1>@item.Nombre</h1>
 
 
         @foreach (var i in Model.ListaH)
         {
-            if(i.Clasificacion == item.Nombre)
+            if (i.Clasificacion == item.Nombre)
             {
                 <div>
                     <img src="~/hamburguesas/@(i.Id).png" />
@@ -30,31 +30,35 @@
                     </span>
                 </div>
             }
-          
-    }
+        }
+    }*@
 
-        @*@foreach (var i in Model.ListaH)
+        @foreach (var item in Model.ListaClasificaciones)
         {
-            <div>
-                <img src="~/hamburguesas/@(i.Id).png" />
-                <h1>@i.Nombre</h1>
-                <h2><del>$110.99</del><br />@i.Precio</h2>
-                <p>
-                    @i.Descripcion
-                </p>
+             <h1>@item.Nombre</h1>
 
-                <span class="acciones">
-                    <a href="editar.html">Editar</a>
-                    <a href="eliminar.html">Eliminar</a>
-                    <a href="quitarpromocion.html">Quitar promoción</a>
+                @foreach (var i in item.Menu)
+                {
+                        
+                            <div>
+                            <img src="~/hamburguesas/@(i.Id).png" />
+                            <h1>@i.Nombre</h1>
+                            <h2><del>$110.99</del><br />@i.Precio</h2>
+                            <p>
+                            @i.Descripción
+                            </p>
 
-                </span>
-            </div>
-        }*@
-       
-    }
-    
-    
+                            <span class="acciones">
+                            <a href="~/Admin/Menu/Editar/@(i.Id)">Editar</a>
+                            <a href="~/Admin/Menu/Eliminar/@(i.Id)">Eliminar</a>
+                            <a href="quitarpromocion.html">Quitar promoción</a>
+
+                            </span>
+                            </div>
+                        
+
+                }
+        }
 
     <a class="fab" href="~/Admin/Menu/Agregar">+</a>
 </section>
