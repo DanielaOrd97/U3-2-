@@ -14,21 +14,17 @@
 
            @foreach (var i in item.Menu)
            {
-                <h2 class="seleccionado"><a href="menu3.html"><span>@i.Nombre</span> <span class="price">@i.Precio</span></a></h2>
+                <h2 class="seleccionado"><a href="~/Home/VerMenu/@i.Nombre.Replace(" ","-")"><span>@i.Nombre</span> <span class="price">@i.Precio</span></a></h2>
 
            }
-                
-
-            @*<h2><a href="menu3.html"><span>Cuarto de libra con queso</span> <span class="price">$111.99</span></a></h2>
-            <h2><a href="menu3.html"><span>Cuarto de libra con queso</span> <span class="price">$111.99</span></a></h2>
-            <h2><a href="menu3.html"><span>Cuarto de libra con queso</span> <span class="price">$111.99</span></a></h2>*@
+            
         }
           
         
         
       </div>
     <div>
-        <img src="hamburguesas/1.png" />
-        <p>Un cuarto de libra de carne de res con dos rebanas de queso, cebolla, pepinillos, mostaza y una porción de tomate, todo en un pan con ajonjolí.</p>
+        <img src="~/hamburguesas/@(Model.IdSeleccionado).png" />
+        <p>@Model.Descripcion</p>
     </div>
 </section>

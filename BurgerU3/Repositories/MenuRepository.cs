@@ -16,6 +16,11 @@ namespace BurgerU3.Repositories
                 .OrderBy(x => x.Nombre);
         }
 
+        public  Menu? GetByNombre(string nombre)
+        {
+            return Context.Menu.Include(x => x.IdClasificacionNavigation).FirstOrDefault(x => x.Nombre == nombre);
+        }
+       
     }
 
     public class ClasifRepository : Repository<Clasificacion>
