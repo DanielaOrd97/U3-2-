@@ -194,5 +194,105 @@ namespace BurgerU3.Areas.Admin.Controllers
 
             return RedirectToAction("Index");
         }
+
+
+        public IActionResult AgregarPromocion(int id)
+        {
+            var hamburguesa = RepoMenu.Get(id);
+
+            if(hamburguesa == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                PromocionAdminViewModel vm = new();
+
+                vm.Id = hamburguesa.Id;
+                vm.Nombre = hamburguesa.Nombre;
+                vm.Precio = hamburguesa.Precio;
+                vm.PrecioPromocion = hamburguesa.PrecioPromocion;
+
+                return View(vm);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult AgregarPromocion(PromocionAdminViewModel vm)
+        {
+            if (vm.PrecioPromocion < 0)
+            {
+                ModelState.AddModelError("", "Ingrese el precio de promocion correctamente.");
+            }
+            if(vm.PrecioPromocion > vm.Precio)
+            {
+                ModelState.AddModelError("", "El precio de promocion debe ser menor al precio actual.");
+            }
+
+            if (ModelState.IsValid)
+            {
+                var hamburguesa = RepoMenu.Get(vm.Id);
+                if (hamburguesa == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                hamburguesa.PrecioPromocion = vm.PrecioPromocion;
+
+                RepoMenu.Update(hamburguesa);
+
+                return RedirectToAction("Index");
+
+            }
+            return View(vm);
+
+
+        }
+
+        public IActionResult EliminarPromocion(int id)
+        {
+            var hamburguesa = RepoMenu.Get(id);
+            if (hamburguesa == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                PromocionAdminViewModel vm = new();
+                vm.Id = hamburguesa.Id;
+                vm.Nombre = hamburguesa.Nombre;
+                vm.Precio = hamburguesa.Precio;
+                vm.PrecioPromocion = hamburguesa.PrecioPromocion;
+
+                return View(vm);
+            }
+
+          
+        }
+
+        [HttpPost]
+        public IActionResult EliminarPromocion(PromocionAdminViewModel vm)
+        {
+
+            if (vm != null && (vm.PrecioPromocion != null || vm.PrecioPromocion != 0))
+            {
+                var hamburguesa = RepoMenu.Get(vm.Id);
+                if (hamburguesa == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                hamburguesa.PrecioPromocion = null;
+                vm.PrecioPromocion = hamburguesa.PrecioPromocion;
+
+                RepoMenu.Update(hamburguesa);
+
+                return RedirectToAction("Index");
+            }
+
+            
+
+            return View(vm);
+        }
     }
 }

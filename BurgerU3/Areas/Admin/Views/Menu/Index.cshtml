@@ -43,7 +43,7 @@
                             <div>
                             <img src="~/hamburguesas/@(i.Id).png" />
                             <h1>@i.Nombre</h1>
-                            <h2><del>$110.99</del><br />@i.Precio</h2>
+                            <h2><del>@i.PrecioPromocion</del><br />@i.Precio</h2>
                             <p>
                             @i.Descripción
                             </p>
@@ -51,7 +51,16 @@
                             <span class="acciones">
                             <a href="~/Admin/Menu/Editar/@(i.Id)">Editar</a>
                             <a href="~/Admin/Menu/Eliminar/@(i.Id)">Eliminar</a>
-                            <a href="quitarpromocion.html">Quitar promoción</a>
+                             @if(i.PrecioPromocion == null)
+                            {
+                                <a href="~/Admin/Menu/AgregarPromocion/@(i.Id)">Agregar promoción</a>
+                            }
+                            else
+                            {
+                                <a href="~/Admin/Menu/EliminarPromocion/@(i.Id)">Quitar promoción</a>
+                            }
+                   
+                            
 
                             </span>
                             </div>
