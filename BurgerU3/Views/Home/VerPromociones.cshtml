@@ -1,0 +1,25 @@
+﻿@model BurgerU3.Models.ViewModels.PromocionesViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "Layout";
+}
+<section class="menu1"> 
+    @foreach (var item in Model.ListaPromos)
+    {
+        <img src="~/hamburguesas/@(item.Id).png" />
+        <div class="datos">
+            <h3>
+                <del>@item.Precio</del>
+                <b>@item.PrecioPromocion</b>
+            </h3>
+            <h2>@item.Nombre</h2>
+            <p>@item.Descripción</p>
+        </div>
+        <span>
+            <a href="promociones.html">&lt;</a>
+            <a href="promociones.html">&gt;</a>
+        </span>
+    }
+    
+</section>
+

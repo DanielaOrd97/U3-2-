@@ -56,5 +56,19 @@ namespace BurgerU3.Controllers
             return View(vm);
         }
 
+
+        public IActionResult VerPromociones()
+        {
+            PromocionesViewModel vm = new();
+            vm.ListaPromos = new List<Menu>();
+
+            foreach (var item in MenuRepo.GetConPromociones())
+            {
+                vm.ListaPromos.Add(item);
+            }
+
+
+            return View(vm);
+        }
     }
 }

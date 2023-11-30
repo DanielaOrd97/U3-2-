@@ -43,7 +43,15 @@
                             <div>
                             <img src="~/hamburguesas/@(i.Id).png" />
                             <h1>@i.Nombre</h1>
-                            <h2><del>@i.PrecioPromocion</del><br />@i.Precio</h2>
+                @if(i.PrecioPromocion != null)
+                {
+                    <h2><del>@i.Precio</del><br />@i.PrecioPromocion</h2>
+                }
+                else
+                {
+                    <h2><br />@i.Precio</h2>
+                }
+
                             <p>
                             @i.Descripción
                             </p>

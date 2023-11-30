@@ -21,6 +21,13 @@ namespace BurgerU3.Repositories
             return Context.Menu.Include(x => x.IdClasificacionNavigation).FirstOrDefault(x => x.Nombre == nombre);
         }
        
+
+        public List<Menu> GetConPromociones()
+        {
+            return Context.Menu
+                .Where(x => x.PrecioPromocion > 0).ToList();
+
+        }
     }
 
     public class ClasifRepository : Repository<Clasificacion>
