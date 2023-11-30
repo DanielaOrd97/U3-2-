@@ -34,19 +34,7 @@ namespace BurgerU3.Controllers
             return View();
         }
 
-        //public IActionResult VerMenu()
-        //{
-        //    MenuViewModel vm = new();
-
-        //    vm.ListaClasificaciones = ClasifRepo.GetAll().OrderBy(x => x.Nombre);
-
-        //    return View(vm);
-        //}
-
-
-
-        ///////////////////////////////////////////////////////////////////
-
+      
 
         public IActionResult VerMenu(string? id)
         {
@@ -67,67 +55,6 @@ namespace BurgerU3.Controllers
 
             return View(vm);
         }
-
-
-
-
-
-        ///////////////////////////////////////////////////////////////
-        ///
-
-
-        //public  IActionResult VerMenu(string id)
-        //{
-        //    id = id.Replace("-", " ");
-
-        //    var hamburguesa = MenuRepo.GetByNombre(id);
-
-        //    if(hamburguesa == null)
-        //    {
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    MenuViewModel vm = new()
-        //    {
-        //        Id = hamburguesa.Id,
-        //        Descripcion = hamburguesa.Descripción
-        //    };
-
-        //    return View(vm);
-        //}
-
-        ////////
-
-        //public IActionResult VerMenu(string id)
-        //{
-        //   if(id != null)
-        //    {
-        //        id = id.Replace("-", " ");
-        //        var hamburguesa = MenuRepo.GetByNombre(id);
-
-        //        if (hamburguesa == null)
-        //        {
-        //            return RedirectToAction("Index");
-        //        }
-
-        //        MenuViewModel vm = new()
-        //        {
-        //            Id = hamburguesa.Id,
-        //            Descripcion = hamburguesa.Descripción
-        //        };
-
-        //        return View(vm);
-        //    }
-        //    else
-        //    {
-
-        //        MenuViewModel vm = new();
-        //        vm.ListaClasificaciones = ClasifRepo.GetAll().OrderBy(x => x.Nombre);
-
-        //        return View(vm);
-        //    }
-
-        //}
 
     }
 }
