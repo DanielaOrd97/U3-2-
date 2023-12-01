@@ -34,8 +34,8 @@ namespace BurgerU3.Controllers
             return View();
         }
 
-      
 
+        
         public IActionResult VerMenu(string? id)
         {
             MenuViewModel vm = new();
@@ -56,19 +56,23 @@ namespace BurgerU3.Controllers
             return View(vm);
         }
 
-
-        public IActionResult VerPromociones()
+        public IActionResult VerPromociones(int id)
         {
             PromocionesViewModel vm = new();
-            vm.ListaPromos = new List<Menu>();
 
-            foreach (var item in MenuRepo.GetConPromociones())
+            vm.Index = id;
+            var lista = MenuRepo.GetConPromociones();
+            vm.Tamano = lista.Count();
+
+            var hamburguesa = lista.ToList()[vm.Index];
+
+            if(hamburguesa != null)
             {
-                vm.ListaPromos.Add(item);
+                vm.menu = hamburguesa;
             }
-
 
             return View(vm);
         }
+ 
     }
 }

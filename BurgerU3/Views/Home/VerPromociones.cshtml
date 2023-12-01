@@ -3,23 +3,26 @@
 @{
     Layout = "Layout";
 }
-<section class="menu1"> 
-    @foreach (var item in Model.ListaPromos)
-    {
-        <img src="~/hamburguesas/@(item.Id).png" />
-        <div class="datos">
-            <h3>
-                <del>@item.Precio</del>
-                <b>@item.PrecioPromocion</b>
-            </h3>
-            <h2>@item.Nombre</h2>
-            <p>@item.Descripción</p>
-        </div>
-        <span>
-            <a href="promociones.html">&lt;</a>
-            <a href="promociones.html">&gt;</a>
-        </span>
-    }
-    
-</section>
 
+<section class="menu1">
+    <img src="~/hamburguesas/@(Model.menu.Id).png" />
+    <div class="datos">
+        <h3>
+            <del>@Model.menu.Precio</del>
+            <b>@Model.menu.PrecioPromocion</b>
+        </h3>
+        <h2>@Model.menu.Nombre</h2>
+        <p>@Model.menu.Descripción</p>
+    </div>
+    <span>
+        @if(Model.Index > 0)
+        {
+            <a href="~/Home/VerPromociones/@(Model.Index-1)">&lt;</a>
+        }
+        @if(Model.Index < Model.Tamano - 1)
+        {
+            <a href="~/Home/VerPromociones/@(Model.Index+1)">&gt;</a>
+        }
+
+    </span>
+</section>
