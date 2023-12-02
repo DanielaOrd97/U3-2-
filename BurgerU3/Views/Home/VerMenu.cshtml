@@ -14,9 +14,18 @@
 
            @foreach (var i in item.Menu)
            {
-                <h2 class="seleccionado"><a href="~/Home/VerMenu/@i.Nombre.Replace(" ","-")"><span>@i.Nombre</span> <span class="price">@i.Precio</span></a></h2>
+                @if(Model.IdSeleccionado == i.Id)
+                {
 
-           }
+                    <h2 class="seleccionado"><a href="~/Home/VerMenu/@i.Nombre.Replace(" ","-")"><span>@i.Nombre</span> <span class="price">@i.Precio</span></a></h2>
+                }
+                else
+                {
+                    <h2><a href="~/Home/VerMenu/@i.Nombre.Replace(" ","-")"><span>@i.Nombre</span> <span class="price">@i.Precio</span></a></h2>
+                }
+
+
+        }
             
         }
           
